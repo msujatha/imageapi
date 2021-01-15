@@ -5,7 +5,7 @@ from flask import Flask, request, make_response
 from werkzeug.utils import secure_filename
 from fastai.vision.all import *
 
-UPLOAD_FOLDER = 'tmp'
+UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
@@ -33,6 +33,8 @@ def predict():
 		filename = secure_filename(file.filename)
 		filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 		file.save(filepath)
+		#img = Image.open(file.stream)
+		#prediction = learner.predict(img)
 		prediction = learner.predict(filepath)
 		return {'success': prediction[0]}, 200
 
