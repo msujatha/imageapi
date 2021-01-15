@@ -15,6 +15,10 @@ learner = load_learner('export.pkl')
 def allowed_file(filename):
    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/')
+def index():
+	return "Hello World!!"
+
 @app.route('/ping')
 def ping():
 	return {'success': 'pong'}, 200
